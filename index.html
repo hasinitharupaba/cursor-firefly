@@ -1,0 +1,74 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorful cursor Firefly tail</title>
+    <style>
+      .cursor {
+        animation: colors 5s infinite;
+        background: #ffdc5f;
+        border-radius: 100%;
+        box-shadow: 0 0 20px #ffdc5f, 0 0 60px #ffdc5f, 0 0 100px #ffdc5f;
+        height: 20px;
+        pointer-events: none;
+        position: absolute;
+        transition: all 20ms ease;
+        width: 20px;
+        z-index: 999;
+      }
+
+      .cursor:after {
+        background: #ffdc5f;
+        border-radius: 100%;
+        bottom: 0;
+        content: "";
+        height: 40px;
+        left: 50%;
+        opacity: 0.2;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+      }
+
+      @keyframes colors {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor"></div>
+
+    <script type="text/javascript">
+      const cursor = document.querySelector(".cursor");
+      var timeout;
+
+      document.addEventListener("mousemove", (e) => {
+        let x = e.pageX;
+        let y = e.pageY;
+
+        cursor.style.top = y + 16 + "px";
+        cursor.style.left = x + 2 + "px";
+        cursor.style.display = "block";
+
+        function mouseStopped() {
+          cursor.style.display = "none";
+        }
+
+        clearTimeout(timeout);
+        timeout = setTimeout(mouseStopped, 1000);
+      });
+
+      document.addEventListener("mouseout", (e) => {
+        cursor.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
